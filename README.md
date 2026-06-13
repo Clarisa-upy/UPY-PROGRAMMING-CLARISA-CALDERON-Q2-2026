@@ -25,3 +25,11 @@ MRM (Midpoint Riemann Sum): The program adds a specific value (h/2) to the posit
 This technique has its own separate code because the mathematical formula is different. It does not use flat rectangles; instead, it works with trapezoids by averaging the sides:
 First, the script calculates the start and end points of the curve by themselves.
 Next, it uses a for loop to multiply all the middle heights by two and add them together, following the correct mathematical rule for trapezoids.Technologies UsedLanguage: Python 3.xVersion Control: GitPlatform: GitHubHow to Run the ProjectMake sure you have Python installed on your computer.
+
+# Environment and Tools
+Language: Python
+Version Control: Git
+Hosting & Collaboration Platform: GitHub
+
+# AI Disclosure
+Artificial intelligence tools were only used to help write and organize this README text. No AI was used to write the actual Python code, design the logic, or manage the Git repository.
