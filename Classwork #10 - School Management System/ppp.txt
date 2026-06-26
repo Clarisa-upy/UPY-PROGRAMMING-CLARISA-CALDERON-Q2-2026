@@ -1,0 +1,111 @@
+# INPUT
+
+INITIALIZE users dictionary with keys: username, password, role, name
+INITIALIZE subjects list ← ["Mathematics", "Programming", "English"]
+INITIALIZE grades nested dictionary with the grades for each student
+
+# PROCESS
+
+REPEAT
+    DISPLAY "Username: "
+    GET username
+    DISPLAY "Password: "
+    GET password
+
+    IF username exists in users AND password IS EQUAL TO users[username]["password"] THEN
+        DISPLAY "Welcome " + users[username]["name"]
+        login_successful ← TRUE
+    ELSE
+        DISPLAY "Incorrect username or password"
+        login_successful ← FALSE
+    ENDIF
+UNTIL login_successful IS TRUE
+
+role ← users[username]["role"]
+
+# STUDENT ROLE
+
+IF role IS EQUAL TO "student" THEN
+
+    approved_subjects ← empty collection
+    DISPLAY "Report card for " + users[username]["name"]
+
+    FOR EACH subject IN subjects DO
+        DISPLAY subject + ": " + grades[username][subject]
+
+        IF grades[username][subject] >= 7 THEN
+            ADD subject TO approved_subjects
+        ENDIF
+    ENDFOR
+
+    pending_subjects ← subjects MINUS approved_subjects
+    DISPLAY "Passed: " + approved_subjects
+    DISPLAY "Pending: " + pending_subjects
+
+# TEACHER ROLE
+
+ELSE IF role IS EQUAL TO "teacher" THEN
+
+    DISPLAY "Role: teacher"
+    DISPLAY "Students:"
+
+    FOR EACH student IN grades DO
+        DISPLAY "- " + users[student]["name"]
+    ENDFOR
+
+    DISPLAY "Subjects:"
+
+    FOR EACH subject IN subjects DO
+        DISPLAY "- " + subject
+    ENDFOR
+
+    DISPLAY "Do you want to change a student's grade? (yes/no)"
+    GET change
+
+    WHILE change IS EQUAL TO "yes" DO
+        DISPLAY "Student username: "
+        GET selected_student
+        DISPLAY "Subject: "
+        GET selected_subject
+
+        IF selected_student exists in grades AND selected_subject exists in subjects THEN
+            DISPLAY "New grade: "
+            GET new_grade
+            DISPLAY "Are you sure? (yes/no): "
+            GET confirmation
+
+            IF confirmation IS EQUAL TO "yes" THEN
+                grades[selected_student][selected_subject] ← new_grade
+                DISPLAY "Grades updated for " + users[selected_student]["name"]
+
+                FOR EACH subject IN subjects DO
+                    DISPLAY subject + ": " + grades[selected_student][subject]
+                ENDFOR
+            ENDIF
+        ELSE
+            DISPLAY "Student or subject not found"
+        ENDIF
+
+        DISPLAY "Do you want to change another grade? (yes/no)"
+        GET change
+    ENDWHILE
+
+# COORDINATOR ROLE
+
+ELSE IF role IS EQUAL TO "coordinator" THEN
+
+    DISPLAY "Teachers:"
+
+    FOR EACH user IN users DO
+        IF users[user]["role"] IS EQUAL TO "teacher" THEN
+            DISPLAY "- " + users[user]["name"]
+        ENDIF
+    ENDFOR
+
+    DISPLAY "Student             | Mathematics | Programming | English"
+
+    FOR EACH student IN grades DO
+        DISPLAY users[student]["name"] + " | " + grades[student]["Mathematics"] + " | " + grades[student]["Programming"] + " | " + grades[student]["English"]
+    ENDFOR
+
+ENDIF
