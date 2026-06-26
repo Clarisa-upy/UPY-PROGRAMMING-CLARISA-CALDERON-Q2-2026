@@ -1,0 +1,21 @@
+# INPUT
+verbo = input("Ingresa el verbo: ")
+
+#PROCESS
+pronombres = ['yo', 'tu', 'el', 'nosotros', 'vosotros', 'ellos']
+
+terminaciones = {
+    'ar': ['o', 'as', 'a', 'amos', 'ais', 'an'],
+    'er': ['o', 'es', 'e', 'emos', 'eis', 'en'],
+    'ir': ['o', 'es', 'e', 'imos', 'is', 'en']
+}
+
+stem = verbo[:-2]
+ending = verbo[-2:]
+
+endings_list = terminaciones[ending]
+
+#OUTPUT
+for index, pronombre in enumerate(pronombres):
+    terminacion = endings_list[index]
+    print(f"{pronombre} {stem}{terminacion}")
