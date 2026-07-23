@@ -1,4 +1,4 @@
-IMPORTAR rando
+IMPORTAR random
 IMPORTAR stddraw
 DESDE color IMPORTAR Color
 
