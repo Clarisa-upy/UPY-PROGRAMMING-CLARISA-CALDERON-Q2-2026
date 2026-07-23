@@ -1,4 +1,4 @@
-import random
+import rando
 import stddraw
 from color import Color
 
